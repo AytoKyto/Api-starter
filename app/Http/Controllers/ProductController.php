@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class ArticleController extends Controller
+class ProductController extends Controller
 {
-    /**
+ /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $results = DB::select('select * from articles');
+        $results = DB::select('select * from product_tables');
         return $results;
     }
 
@@ -36,13 +36,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $articles = DB::table('articles')->insert([
+        $product = DB::table('product_tables')->insert([
             'title' => $request->title,
             'body' => $request->body,
-            'author' => $request->author,
-            'category' => $request->category,
-            'created_at' => date('Y-m-d H:i:s'),
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'collection_id' => $request->collection_id,
+            'imageproduct_id' => $request->imageproduct_id,
             'updated_at' =>  date('Y-m-d H:i:s'),
+            'created_at' =>  date('Y-m-d H:i:s'),
         ]);
         return response()->json(['message' => 'This is a POST request'], 201);
     }
@@ -55,7 +57,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $results = DB::select('select * from articles where id in (' . $id . ')');
+        $results = DB::select('select * from product where id in (' . $id . ')');
         return $results;
     }
 
@@ -79,11 +81,13 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = DB::table('articles')->where('id', $id)->update([
+        $product = DB::table('product')->where('id', $id)->update([
             'title' => $request->title,
             'body' => $request->body,
-            'author' => $request->author,
-            'category' => $request->category,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'collection_id' => $request->collection_id,
+            'imageproduct_id' => $request->imageproduct_id,
             'updated_at' =>  date('Y-m-d H:i:s'),
         ]);
         return response()->json(['message' => 'This is a PUT request'], 200);

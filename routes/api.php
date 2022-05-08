@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -21,7 +21,7 @@ use App\Http\Controllers\AuthController;
 // Public Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::resource('/articles', ArticleController::class);
+Route::resource('/product', ProductController::class);
 
 
 // Protected Routes

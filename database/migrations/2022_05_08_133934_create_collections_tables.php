@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('body');
-            $table->string('author');
-            $table->string('category');
-            $table->timestamps();
+        Schema::create('collections_tables', function (Blueprint $table) {
+            $table->id();        
+            $table->string('name');
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('collections_tables');
     }
 };
