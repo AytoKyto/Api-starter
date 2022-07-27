@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class ArticleController extends Controller
+class ProductController extends Controller
 {
-    /**
+ /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $results = DB::select('select * from articles');
+        $results = DB::select('select * from product_tables');
         return $results;
     }
 
@@ -37,8 +37,9 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $articles = DB::table('articles')->insert([
+        $product = DB::table('product_tables')->insert([
             'title' => $request->title,
+<<<<<<< HEAD:app/Http/Controllers/ArticleController.php
             'content' => $request->content,
             'author' => $request->author,
             'category' => $request->category,
@@ -46,7 +47,15 @@ class ArticleController extends Controller
             'title_seo' => $request->title_seo,
             'content_seo' => $request->content_seo,
             'created_at' => date('Y-m-d H:i:s'),
+=======
+            'body' => $request->body,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'collection_id' => $request->collection_id,
+            'imageproduct_id' => $request->imageproduct_id,
+>>>>>>> 546088734d365d9eebd57e5d774a5b2d99982298:app/Http/Controllers/ProductController.php
             'updated_at' =>  date('Y-m-d H:i:s'),
+            'created_at' =>  date('Y-m-d H:i:s'),
         ]);
         return response()->json(['message' => 'This is a POST request'], 201);
     }
@@ -59,7 +68,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $results = DB::select('select * from articles where id in (' . $id . ')');
+        $results = DB::select('select * from product where id in (' . $id . ')');
         return $results;
     }
 
@@ -83,14 +92,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = DB::table('articles')->where('id', $id)->update([
+        $product = DB::table('product')->where('id', $id)->update([
             'title' => $request->title,
+<<<<<<< HEAD:app/Http/Controllers/ArticleController.php
             'content' => $request->content,
             'author' => $request->author,
             'category' => $request->category,
             'publi_type' => $request->publi_type,
             'title_seo' => $request->title_seo,
             'content_seo' => $request->content_seo,
+=======
+            'body' => $request->body,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'collection_id' => $request->collection_id,
+            'imageproduct_id' => $request->imageproduct_id,
+>>>>>>> 546088734d365d9eebd57e5d774a5b2d99982298:app/Http/Controllers/ProductController.php
             'updated_at' =>  date('Y-m-d H:i:s'),
         ]);
         return response()->json(['message' => 'This is a PUT request'], 200);
