@@ -1,20 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class ComponentController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $results = DB::select('select * from articles');
+        $results = DB::select('select * from component');
         return $results;
     }
 
@@ -37,14 +36,10 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $articles = DB::table('articles')->insert([
+        $component = DB::table('component')->insert([
+            'id_pages' => $request->id_pages,
             'title' => $request->title,
-            'content' => $request->content,
-            'author' => $request->author,
-            'category' => $request->category,
-            'publi_type' => $request->publi_type,
-            'title_seo' => $request->title_seo,
-            'content_seo' => $request->content_seo,
+            'image' => $request->image,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' =>  date('Y-m-d H:i:s'),
         ]);
@@ -59,7 +54,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $results = DB::select('select * from articles where id in (' . $id . ')');
+        $results = DB::select('select * from component where id in (' . $id . ')');
         return $results;
     }
 
@@ -83,14 +78,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = DB::table('articles')->where('id', $id)->update([
+        $component = DB::table('component')->where('id', $id)->update([
+            'id_pages' => $request->id_pages,
             'title' => $request->title,
-            'content' => $request->content,
-            'author' => $request->author,
-            'category' => $request->category,
-            'publi_type' => $request->publi_type,
-            'title_seo' => $request->title_seo,
-            'content_seo' => $request->content_seo,
+            'image' => $request->image,
             'updated_at' =>  date('Y-m-d H:i:s'),
         ]);
         return response()->json(['message' => 'This is a PUT request'], 200);
@@ -104,7 +95,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $articles = DB::table('articles')->where('id', $id)->delete();
+        $component = DB::table('component')->where('id', $id)->delete();
         return response()->json(['message' => 'This is a DELETE request'], 204);
     }
 }

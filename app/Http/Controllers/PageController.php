@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $results = DB::select('select * from articles');
+        $results = DB::select('select * from pages');
         return $results;
     }
 
@@ -25,8 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        
-        return response()->json(['message' => 'This is a GET request'], 200);
+        //
     }
 
     /**
@@ -37,11 +35,9 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $articles = DB::table('articles')->insert([
+        $pages = DB::table('pages')->insert([
             'title' => $request->title,
-            'content' => $request->content,
             'author' => $request->author,
-            'category' => $request->category,
             'publi_type' => $request->publi_type,
             'title_seo' => $request->title_seo,
             'content_seo' => $request->content_seo,
@@ -59,7 +55,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $results = DB::select('select * from articles where id in (' . $id . ')');
+        $results = DB::select('select * from pages where id in (' . $id . ')');
         return $results;
     }
 
@@ -83,11 +79,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = DB::table('articles')->where('id', $id)->update([
+        $pages = DB::table('pages')->where('id', $id)->update([
             'title' => $request->title,
-            'content' => $request->content,
             'author' => $request->author,
-            'category' => $request->category,
             'publi_type' => $request->publi_type,
             'title_seo' => $request->title_seo,
             'content_seo' => $request->content_seo,
@@ -104,7 +98,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $articles = DB::table('articles')->where('id', $id)->delete();
+        $pages = DB::table('pages')->where('id', $id)->delete();
         return response()->json(['message' => 'This is a DELETE request'], 204);
     }
 }

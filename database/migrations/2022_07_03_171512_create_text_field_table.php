@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dogs', function (Blueprint $table) {
+        Schema::create('text_field', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('age');
+            $table->bigInteger('id_component')->nullable();
+            $table->string('title')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dogs');
+        Schema::dropIfExists('text_field');
     }
 };
